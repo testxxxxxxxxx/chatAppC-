@@ -1,10 +1,11 @@
-#ifndef CONNECT_HPP
+#ifndef NOTIFICATION_HPP
 
-#define CONNECT_HPP
+#define NOTIFICATION_HPP
 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <string>
 
 namespace NotificationSystem {
 
