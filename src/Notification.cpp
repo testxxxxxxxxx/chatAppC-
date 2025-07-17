@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/Notification.hpp"
+#include "include/NotificationSystem/Notification.hpp"
 
 using namespace std;
 using namespace NotificationSystem;
