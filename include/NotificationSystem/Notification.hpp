@@ -11,7 +11,9 @@ namespace NotificationSystem {
 
     class Notification {
 
-        int port;
+        int serverFd, newSocket, port;
+        struct sockaddr_in address;
+        socklen_t addrlen = sizeof(address);
 
         int init();
         int listen();
@@ -19,9 +21,7 @@ namespace NotificationSystem {
 
         public:
 
-            Notification(int port): port(port) {
-
-            }
+            Notification(int port): port(port) {}
             ~Notification() {
                 this->close();
             }
