@@ -25,13 +25,19 @@ int Notification::init() {
     return 1;
 }
 int Notification::listen() {
-
+    //start listening at port X
+    if(listen(this->serverFd, 3) < 0)
+        return -1;
+    return 1;
 }
 int Notification::waitForRequest() {
-
+    //wait for notification
+    if(this->newSocket = accept(this->serverFd, (struct sockaddr* )& address, &this->addrlen) < 0)
+        return -1;
+    return 1;
 }
-int Notification::send() {
-
+void Notification::send() {
+    send(this->newSocket, this->content, this->content.length(), 0);
 }
 string Notification::get() {
 

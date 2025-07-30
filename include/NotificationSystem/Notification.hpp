@@ -9,11 +9,19 @@
 
 namespace NotificationSystem {
 
-    class Notification {
+    class ANotification {
+        public:
+            virtual int waitForRequest() = 0;
+            virtual void send() = 0;
+            virtual string get() = 0;
+
+    };
+    class Notification : public ANotification {
 
         int serverFd, newSocket, port;
         struct sockaddr_in address;
         socklen_t addrlen = sizeof(address);
+        string content;
 
         int init();
         int listen();
@@ -21,14 +29,14 @@ namespace NotificationSystem {
 
         public:
 
-            Notification(int port): port(port) {}
+            Notification(string content, int port): content(content), port(port) {}
             ~Notification() {
                 this->close();
             }
 
-            int waitForRequest();
-            int send();
-            string get();
+            int waitForRequest() override;
+            void send() override;
+            string get() override;
 
         };
 
