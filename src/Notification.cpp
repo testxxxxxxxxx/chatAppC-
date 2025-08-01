@@ -40,8 +40,15 @@ void Notification::send() {
     send(this->newSocket, this->content, this->content.length(), 0);
 }
 string Notification::get() {
+    //get notification about new message
+    string response;
+    ssize_t readv = read(this->newSocket, &response, 1024 - 1);
 
+    return response;
 }
-int Notification::close() {
-
+int Notification::closeNew() {
+    close(this->newSocket);
+}
+int Notification::closeFd() {
+    close(this->serverFd);
 }
