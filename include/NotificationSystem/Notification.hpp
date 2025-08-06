@@ -34,10 +34,7 @@ namespace NotificationSystem {
         public:
 
             Notification(string content, int port): content(content), port(port) {}
-            ~Notification() {
-                this->closeNew();
-                this->closeFd();
-            }
+            ~Notification(); 
 
             int waitForRequest() override;
             void send() override;

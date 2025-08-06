@@ -4,6 +4,10 @@
 using namespace std;
 using namespace NotificationSystem;
 
+Notification::~Notification() {
+    this->closeNew();
+    this->closeFd();
+}
 int Notification::init() {
     //creating, setup and init notification
 

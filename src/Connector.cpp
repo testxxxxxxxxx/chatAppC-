@@ -3,13 +3,13 @@
 
 using namespace std;
 using namespace Database;
+using namespace pqxx;
 
 Connector::~Connector() {
 
 }
 void Connector::init() {
+    string conninfo = "host=" + this->host + " dbname=" + this->dbname + " user=" + this->user + " password=" + this->password;
 
-}
-void Connector::close() {
-
+    this->conn = make_unique<connection>();
 }
