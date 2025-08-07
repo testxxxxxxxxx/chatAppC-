@@ -1,9 +1,12 @@
 #ifndef ORM_HPP
 
 #define ORM_HPP
+
+#include <iostream>
 #include <memory>
 #include <pqxx/pqxx>
 
+using namespace std;
 using namespace pqxx;
 
 namespace Database {
@@ -12,8 +15,9 @@ namespace Database {
 
         string host, user, password, dbname;
         int port;
-        connection *conn;
         unique_ptr<connection> conn;
+
+        void init();
 
         public:
 
@@ -22,7 +26,7 @@ namespace Database {
             }
             ~Connector();
 
-            void init();
+            result get(string sql);
 
     };
 

@@ -2,20 +2,22 @@
 
 #define NOTIFICATION_HPP
 
+#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
-#include <string>
+
+using namespace std;
 
 namespace NotificationSystem {
 
     class ANotification {
         virtual int init() = 0;
-        virtual int listen() = 0;
+        virtual int listenOnPort() = 0;
         virtual int closeFd() = 0;
         public:
             virtual int waitForRequest() = 0;
-            virtual void send() = 0;
+            virtual void sendContent() = 0;
             virtual string get() = 0;
             virtual int closeNew() = 0;
 
@@ -28,7 +30,7 @@ namespace NotificationSystem {
         string content;
 
         int init();
-        int listen();
+        int listenOnPort();
         int closeFd();
 
         public:
@@ -37,7 +39,7 @@ namespace NotificationSystem {
             ~Notification(); 
 
             int waitForRequest() override;
-            void send() override;
+            void sendContent() override;
             string get() override;
             int closeNew() override;
 

@@ -1,5 +1,8 @@
 #include <iostream>
-#include "include/NotificationSystem/Notification.hpp"
+#include "../include/NotificationSystem/Notification.hpp"
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace NotificationSystem;
@@ -28,7 +31,7 @@ int Notification::init() {
 
     return 1;
 }
-int Notification::listen() {
+int Notification::listenOnPort() {
     //start listening at port X
     if(listen(this->serverFd, 3) < 0)
         return -1;
@@ -40,8 +43,8 @@ int Notification::waitForRequest() {
         return -1;
     return 1;
 }
-void Notification::send() {
-    send(this->newSocket, this->content, this->content.length(), 0);
+void Notification::sendContent() {
+    send(this->newSocket, this->content.c_str(), this->content.length(), 0);
 }
 string Notification::get() {
     //get notification about new message
@@ -51,8 +54,8 @@ string Notification::get() {
     return response;
 }
 int Notification::closeNew() {
-    close(this->newSocket);
+    return close(this->newSocket);
 }
 int Notification::closeFd() {
-    close(this->serverFd);
+    return close(this->serverFd);
 }
