@@ -23,9 +23,15 @@ void Connector::init() {
         throw string("Database connection exception");
 }
 result Connector::get(string sql) {
-    //execute queries
+    //select operations
     nontransaction txn(*this->conn);
     result r = txn.exec(sql);
 
     return r;
+}
+void Connector::exec(string sql) {
+    //insert, update, delete operations
+    work W(*this->conn);
+    W.exec(sql);
+    W.commit();
 }

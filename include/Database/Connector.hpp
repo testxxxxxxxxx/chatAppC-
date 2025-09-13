@@ -27,6 +27,7 @@ namespace Database {
             ~Connector();
 
             result get(string sql);
+            void exec(string sql);
 
     };
 
